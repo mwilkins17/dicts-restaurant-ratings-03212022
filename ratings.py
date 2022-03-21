@@ -7,13 +7,17 @@
 def get_restaurant_and_ratings(file_name):
     file = open(file_name)
     restaurants_and_ratings = {}
-    for line in file:
-        line = line.rstrip()
-        line = line.split(":")
+    sorted_file = sorted(file)
+    # print(sorted_file)
+    for line in sorted_file:
+        line = line.rstrip().split(":") # order matters! 
         restaurant = line[0]
         rating = line[1]
         restaurants_and_ratings[restaurant] = restaurants_and_ratings.get(restaurant, 0) + int(rating)
-    print(restaurants_and_ratings)
+  
     
+    for key, value in restaurants_and_ratings.items():
+        print(f'{key} is rated at {value}.')
+    file = file.close()
 
 get_restaurant_and_ratings("scores.txt")
